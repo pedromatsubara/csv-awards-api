@@ -49,9 +49,21 @@ Returns the producers with the minimum and maximum interval between awards.
       "interval": 1,
       "previousWin": 2000,
       "followingWin": 2001
+    },
+    {
+      "producer": "Producer 2",
+      "interval": 2,
+      "previousWin": 1978,
+      "followingWin": 1980
     }
   ],
   "max": [
+    {
+      "producer": "Producer 1",
+      "interval": 4,
+      "previousWin": 2001,
+      "followingWin": 2005
+    },
     {
       "producer": "Producer 2",
       "interval": 30,
