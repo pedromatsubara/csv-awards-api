@@ -1,8 +1,8 @@
 import fs from "fs";
 import csv from "csv-parser";
 import db from "../config/database.js";
-import { splitProducers } from "../utils/splitProducers.js";
 import { isValidRow, validateHeaders } from "../validators/validateCSV.js";
+import { splitProducers } from "../utils/awardDataUtils.js";
 
 export function loadCSVData(filePath) {
   return new Promise((resolve, reject) => {

@@ -1,4 +1,8 @@
 import { getAwardsByType } from "../repositories/awards.repository.js";
+import {
+  collectAllIntervals,
+  groupWinsByProducer,
+} from "../utils/awardDataUtils.js";
 
 export function findMinAndMaxAwardIntervals() {
   const min = getAwardsByType("min");
@@ -7,41 +11,14 @@ export function findMinAndMaxAwardIntervals() {
 }
 
 export function calculateIntervals(data) {
-  const winsByProducer = new Map();
-  const min = [];
-  const max = [];
+  const winsByProducer = groupWinsByProducer(data);
+  const allIntervals = collectAllIntervals(winsByProducer);
 
-  for (const { producer, year } of data) {
-    if (!winsByProducer.has(producer)) {
-      winsByProducer.set(producer, []);
-    }
-    winsByProducer.get(producer).push(year);
-  }
+  const minIntervalValue = Math.min(...allIntervals.map((e) => e.interval));
+  const maxIntervalValue = Math.max(...allIntervals.map((e) => e.interval));
 
-  for (const [producer, years] of winsByProducer.entries()) {
-    if (years.length < 2) continue;
-
-    const sortedYears = [...years].sort((a, b) => a - b);
-    const intervals = [];
-
-    for (let i = 1; i < sortedYears.length; i++) {
-      intervals.push({
-        interval: sortedYears[i] - sortedYears[i - 1],
-        previousWin: sortedYears[i - 1],
-        followingWin: sortedYears[i],
-      });
-    }
-
-    const minInterval = intervals.reduce((a, b) =>
-      a.interval < b.interval ? a : b
-    );
-    const maxInterval = intervals.reduce((a, b) =>
-      a.interval > b.interval ? a : b
-    );
-
-    min.push({ producer, ...minInterval });
-    max.push({ producer, ...maxInterval });
-  }
-
-  return { min, max };
+  return {
+    min: allIntervals.filter((e) => e.interval === minIntervalValue),
+    max: allIntervals.filter((e) => e.interval === maxIntervalValue),
+  };
 }
