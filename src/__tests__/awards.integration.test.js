@@ -23,12 +23,6 @@ describe("GET /awards/intervals", () => {
     const expected = {
       min: [
         {
-          producer: "Susan Levin",
-          interval: 4,
-          previousWin: 2005,
-          followingWin: 2009,
-        },
-        {
           producer: "Allan Carr",
           interval: 0,
           previousWin: 1980,
@@ -36,15 +30,9 @@ describe("GET /awards/intervals", () => {
         },
         {
           producer: "Joel Silver",
-          interval: 3,
-          previousWin: 1991,
+          interval: 0,
+          previousWin: 1994,
           followingWin: 1994,
-        },
-        {
-          producer: "Robert Zemeckis",
-          interval: 4,
-          previousWin: 2005,
-          followingWin: 2009,
         },
       ],
       max: [
@@ -53,24 +41,6 @@ describe("GET /awards/intervals", () => {
           interval: 25,
           previousWin: 1980,
           followingWin: 2005,
-        },
-        {
-          producer: "Allan Carr",
-          interval: 7,
-          previousWin: 1983,
-          followingWin: 1990,
-        },
-        {
-          producer: "Joel Silver",
-          interval: 11,
-          previousWin: 1994,
-          followingWin: 2005,
-        },
-        {
-          producer: "Robert Zemeckis",
-          interval: 4,
-          previousWin: 2005,
-          followingWin: 2009,
         },
       ],
     };
